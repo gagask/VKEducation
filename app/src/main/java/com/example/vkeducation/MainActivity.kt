@@ -102,6 +102,18 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 text = "Позвонить другу"
             )
         }
+        Button(
+            onClick = {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_TEXT, text)
+                intent.type = "text/plain"
+                context.startActivity(intent)
+            }
+        ) {
+            Text(
+                text = "Поделиться текстом"
+            )
+        }
     }
 }
 
