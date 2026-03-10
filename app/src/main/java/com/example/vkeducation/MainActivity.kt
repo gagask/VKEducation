@@ -92,10 +92,13 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         }
         Button(
             onClick = {
-                //TODO parse phone number
-                val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = "tel:$text".toUri()
-                context.startActivity(intent)
+                val patternPhone =
+                    Regex("^([+]?[\\s0-9]+)?(\\d{3}|[(]?[0-9]+[)])?([-]?[\\s]?[0-9])+\$")
+                if (text.matches(patternPhone)){
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = "tel:$text".toUri()
+                    context.startActivity(intent)
+                }
             }
         ) {
             Text(
