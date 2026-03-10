@@ -1,8 +1,8 @@
 package com.example.vkeducation
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.widget.EditText
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.vkeducation.ui.theme.VKeducationTheme
+import androidx.core.net.toUri
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,6 +88,18 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "Открыть вторую Activity"
+            )
+        }
+        Button(
+            onClick = {
+                //TODO parse phone number
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = "tel:$text".toUri()
+                context.startActivity(intent)
+            }
+        ) {
+            Text(
+                text = "Позвонить другу"
             )
         }
     }
