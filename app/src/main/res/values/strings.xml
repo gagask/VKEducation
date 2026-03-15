@@ -17,4 +17,5 @@
     <string name="app_details_developer">Разработчик</string>
 
     <string name="under_developement">В процессе разработки</string>
+    <string name="rustore_logo_message">RuStore Logo</string>
 </resources>

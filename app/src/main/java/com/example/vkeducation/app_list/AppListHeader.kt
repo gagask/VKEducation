@@ -1,5 +1,6 @@
 package com.example.vkeducation.app_list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -17,7 +18,9 @@ import androidx.compose.ui.unit.sp
 import com.example.vkeducation.R
 
 @Composable
-fun AppListHeader(){
+fun AppListHeader(
+    onLogoClicked: () -> Unit = {}
+){
     Row(
         modifier = Modifier
             .padding(vertical = 24.dp)
@@ -30,6 +33,9 @@ fun AppListHeader(){
             tint = Color.White,
             modifier = Modifier
                 .size(40.dp)
+                .clickable{
+                    onLogoClicked()
+                }
         )
         Text(
             "RuStore",
