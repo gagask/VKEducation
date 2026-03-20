@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.vkeducation.data.AppCard
+import com.example.vkeducation.app_list.AppCard
 
 @Composable
 fun AppCard(app: AppCard, onClick: () -> Unit) {
@@ -51,3 +51,10 @@ fun AppCard(app: AppCard, onClick: () -> Unit) {
         }
     }
 }
+
+data class AppCard (
+    val image: Int,
+    val name: String,
+    val shortDescription: String,
+    val type: String
+)

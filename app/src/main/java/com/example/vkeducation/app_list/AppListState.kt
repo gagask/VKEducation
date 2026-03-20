@@ -1,7 +1,7 @@
 package com.example.vkeducation.app_list
 
 import androidx.compose.runtime.Immutable
-import com.example.vkeducation.data.AppCard
+import com.example.vkeducation.app_list.AppCard
 
 sealed interface AppListState {
     data object Loading: AppListState

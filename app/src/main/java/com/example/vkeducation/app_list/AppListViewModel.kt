@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkeducation.R
-import com.example.vkeducation.data.AppCard
+import com.example.vkeducation.app_list.AppCard
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
