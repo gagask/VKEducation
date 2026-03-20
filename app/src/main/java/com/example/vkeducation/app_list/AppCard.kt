@@ -1,6 +1,5 @@
 package com.example.vkeducation.app_list
 
-import android.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,10 +18,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.vkeducation.app_list.AppCard
 
 @Composable
-fun AppCard(app: AppCard, onClick: () -> Unit) {
+fun AppCard(app: AppCardInfo, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -56,10 +54,3 @@ fun AppCard(app: AppCard, onClick: () -> Unit) {
         }
     }
 }
-
-data class AppCard (
-    val image: Int,
-    val name: String,
-    val shortDescription: String,
-    val type: String
-)

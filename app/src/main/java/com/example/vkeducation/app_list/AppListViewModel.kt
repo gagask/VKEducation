@@ -1,10 +1,8 @@
 package com.example.vkeducation.app_list
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkeducation.R
-import com.example.vkeducation.app_list.AppCard
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,35 +41,35 @@ class AppListViewModel: ViewModel() {
     }
 
     private fun getAppCards() = listOf(
-        AppCard(
+        AppCardInfo(
             R.drawable.sber,
             "СберБанк Онлайн - с Салютом",
             "Больше чем банк",
             "Финансы"),
-        AppCard(
+        AppCardInfo(
             R.drawable.yandex_browser,
             "Яндекс.Браузер - с Алисой",
             "Быстрый и безопасный браузер",
             "Инструменты"
         ),
-        AppCard(
+        AppCardInfo(
             R.drawable.mail,
             "Почта Mail.ru",
             "Почтовый клиент для любых ящиков",
             "Инструменты"
         ),
-        AppCard(
+        AppCardInfo(
             R.drawable.yan_nav,
             "Яндекс Навигатор",
             "Парковки и заправки - по пути",
             "Транспорт"
         ),
-        AppCard(
+        AppCardInfo(
             R.drawable.my_mts,
             "Мой МТС",
             "Мой МТС - центр экосистемы МТС",
             "Инструменты"),
-        AppCard(
+        AppCardInfo(
             R.drawable.yan_alisa,
             "Яндекс - с Алисой",
             "Яндекс - поиск всегда под рукой",
