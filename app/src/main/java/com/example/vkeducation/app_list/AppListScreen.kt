@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -24,10 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vkeducation.R
+import com.example.vkeducation.RuStoreApp
+import com.example.vkeducation.ui.theme.VkEducationTheme
 
 @Composable
 fun AppListScreen(
@@ -80,7 +84,7 @@ fun AppListScreen(
                 snackbarHost = {
                     SnackbarHost(snackbarHostState)
                 },
-                containerColor = Color(0xff0077FF),
+                containerColor = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.fillMaxSize(),
                 topBar = { AppListHeader { viewModel.showLogoMessage() } }
             ) { innerPadding ->
@@ -90,7 +94,7 @@ fun AppListScreen(
                         .padding(innerPadding)
                         .fillMaxSize()
                         .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                        .background(Color.White)
+                        .background(MaterialTheme.colorScheme.background)
                         .padding(top = 16.dp)
                 ) {
                     items(currentState.apps){ appCard ->
@@ -99,6 +103,14 @@ fun AppListScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun AppListScreenPreview() {
+    VkEducationTheme {
+        RuStoreApp()
     }
 }
 
