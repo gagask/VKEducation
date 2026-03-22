@@ -1,4 +1,4 @@
-package com.example.vkeducation.app_details
+package com.example.vkeducation.presentation.appdetails
 
 data class App(
     val name: String,

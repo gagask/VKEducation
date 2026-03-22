@@ -1,4 +1,4 @@
-package com.example.vkeducation.app_details
+package com.example.vkeducation.presentation.appdetails
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

@@ -1,4 +1,4 @@
-package com.example.vkeducation.app_list
+package com.example.vkeducation.presentation.applist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -15,12 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.vkeducation.domain.AppCard
 
 @Composable
-fun AppCard(app: AppCardInfo, onClick: () -> Unit) {
+fun AppCard(app: AppCard, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,7 +49,7 @@ fun AppCard(app: AppCardInfo, onClick: () -> Unit) {
                 color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-                text = app.type,
+                text = stringResource(app.type.titleResId),
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onBackground
             )

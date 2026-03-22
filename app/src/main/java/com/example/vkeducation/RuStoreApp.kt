@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.vkeducation.app_details.AppDetailsScreen
-import com.example.vkeducation.app_list.AppListScreen
+import com.example.vkeducation.presentation.appdetails.AppDetailsScreen
+import com.example.vkeducation.presentation.applist.AppListScreen
 
 enum class RuStoreScreen{
     Apps,
