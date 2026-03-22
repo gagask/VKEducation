@@ -1,6 +1,7 @@
 package com.example.vkeducation.presentation.appdetails
 
 import androidx.compose.runtime.Immutable
+import com.example.vkeducation.domain.AppDetails
 
 @Immutable
 sealed interface AppDetailsState {

@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.vkeducation.domain.AppDetails
+import com.example.vkeducation.domain.Category
 import com.example.vkeducation.ui.theme.VkEducationTheme
 
 @Composable
@@ -82,6 +84,7 @@ private fun Preview() {
         AppDetailsContent(
             content = AppDetailsState.Content(
                 appDetails = AppDetails(
+                    id = "Guild",
                     name = "Гильдия Героев: Экшен ММО РПГ",
                     developer = "VK Play",
                     category = Category.GAME,

@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.vkeducation.R
+import com.example.vkeducation.domain.AppDetails
+import com.example.vkeducation.domain.Category
 import com.example.vkeducation.ui.theme.VkEducationTheme
 import kotlin.math.roundToInt
 
@@ -96,6 +98,7 @@ private fun getCategoryText(category: Category): String = when (category) {
 @Composable
 private fun Preview() {
     val appDetails = AppDetails(
+        id = "Guild",
         name = "Гильдия Героев: Экшен ММО РПГ",
         developer = "VK Play",
         category = Category.GAME,
