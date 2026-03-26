@@ -1,8 +1,9 @@
 package com.example.vkeducation.data
 
+import jakarta.inject.Inject
 import kotlinx.coroutines.delay
 
-class AppDetailsApi {
+class AppDetailsApi @Inject constructor() {
     suspend fun get(id: String): AppDetailsDto {
         delay(2000L)
         return AppDetailsDto(

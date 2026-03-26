@@ -1,8 +1,9 @@
 package com.example.vkeducation.data
 
 import com.example.vkeducation.domain.AppDetails
+import jakarta.inject.Inject
 
-class AppDetailsMapper(
+class AppDetailsMapper @Inject constructor(
     private val categoryMapper: CategoryMapper
 ) {
     fun toDomain(dto: AppDetailsDto) = AppDetails(
