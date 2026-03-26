@@ -7,6 +7,8 @@ import com.example.vkeducation.data.AppListApi
 import com.example.vkeducation.data.AppListMockRepositoryImpl
 import com.example.vkeducation.data.AppTypeMapper
 import com.example.vkeducation.domain.AppListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,12 +16,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class AppListViewModel: ViewModel() {
-
-    private val appListRepository: AppListRepository = AppListMockRepositoryImpl(
-        mapper = AppCardMapper(AppTypeMapper()),
-        api = AppListApi()
-    )
+@HiltViewModel
+class AppListViewModel @Inject constructor(
+    private val appListRepository: AppListMockRepositoryImpl
+): ViewModel() {
 
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
     val state = _state.asStateFlow()

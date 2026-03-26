@@ -2,8 +2,9 @@ package com.example.vkeducation.data
 
 import com.example.vkeducation.domain.AppCard
 import com.example.vkeducation.domain.AppListRepository
+import jakarta.inject.Inject
 
-class AppListMockRepositoryImpl(
+class AppListMockRepositoryImpl @Inject constructor(
     private val mapper: AppCardMapper,
     private val api: AppListApi
 ): AppListRepository {
