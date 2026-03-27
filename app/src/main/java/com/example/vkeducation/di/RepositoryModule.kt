@@ -1,9 +1,9 @@
 package com.example.vkeducation.di
 
 import com.example.vkeducation.data.AppDetailsMockRepositoryImpl
-import com.example.vkeducation.data.AppListMockRepositoryImpl
+import com.example.vkeducation.data.AppRepositoryImpl
 import com.example.vkeducation.domain.AppDetailsRepository
-import com.example.vkeducation.domain.AppListRepository
+import com.example.vkeducation.domain.AppRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,8 +15,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindAppListRepository(
-        impl: AppListMockRepositoryImpl
-    ): AppListRepository
+        impl: AppRepositoryImpl
+    ): AppRepository
 
     @Binds
     abstract fun bindAppDetailsRepository(

@@ -1,12 +1,9 @@
 package com.example.vkeducation.presentation.applist
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vkeducation.data.AppCardMapper
-import com.example.vkeducation.data.AppListApi
-import com.example.vkeducation.data.AppListMockRepositoryImpl
-import com.example.vkeducation.data.AppTypeMapper
-import com.example.vkeducation.domain.AppListRepository
+import com.example.vkeducation.domain.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -18,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
-    private val appListRepository: AppListMockRepositoryImpl
+    private val appRepository: AppRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
@@ -43,9 +40,10 @@ class AppListViewModel @Inject constructor(
             _state.value = AppListState.Loading
 
             runCatching {
-                val appCards = appListRepository.get()
+                val appCards = appRepository.getApps()
                 _state.value = AppListState.Content(appCards)
-            }.onFailure {
+            }.onFailure { error ->
+                Log.d("AppListViewModel", "${error.message}")
                 _state.value = AppListState.Error
             }
         }
