@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
-    private val appListRepository: AppListMockRepositoryImpl
+    private val appListRepository: AppListRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
