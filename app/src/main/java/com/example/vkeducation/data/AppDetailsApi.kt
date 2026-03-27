@@ -1,5 +1,6 @@
 package com.example.vkeducation.data
 
+import com.example.vkeducation.data.dto.AppDetailsDto
 import jakarta.inject.Inject
 import kotlinx.coroutines.delay
 

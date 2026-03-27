@@ -1,4 +1,4 @@
-package com.example.vkeducation.data
+package com.example.vkeducation.data.dto
 
 data class AppCardDto (
     val image: Int,

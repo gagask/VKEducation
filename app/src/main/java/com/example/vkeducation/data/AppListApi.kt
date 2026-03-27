@@ -1,6 +1,7 @@
 package com.example.vkeducation.data
 
 import com.example.vkeducation.R
+import com.example.vkeducation.data.dto.AppCardDto
 import jakarta.inject.Inject
 
 class AppListApi @Inject constructor() {

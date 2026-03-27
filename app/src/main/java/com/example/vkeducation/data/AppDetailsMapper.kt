@@ -1,5 +1,6 @@
 package com.example.vkeducation.data
 
+import com.example.vkeducation.data.dto.AppDetailsDto
 import com.example.vkeducation.domain.AppDetails
 import jakarta.inject.Inject
 

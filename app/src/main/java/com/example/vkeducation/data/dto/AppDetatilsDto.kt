@@ -1,4 +1,4 @@
-package com.example.vkeducation.data
+package com.example.vkeducation.data.dto
 
 data class AppDetailsDto(
     val id: String,
