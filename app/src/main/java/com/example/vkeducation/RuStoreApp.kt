@@ -5,13 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.vkeducation.presentation.appdetails.AppDetailsScreen
 import com.example.vkeducation.presentation.applist.AppListScreen
+import com.example.vkeducation.presentation.navigation.Screen
 
-enum class RuStoreScreen{
-    Apps,
-    AppDetails
-}
 
 @Composable
 fun RuStoreApp() {
@@ -20,18 +18,20 @@ fun RuStoreApp() {
 
     NavHost(
         navController = navController,
-        startDestination = RuStoreScreen.Apps.name,
+        startDestination = Screen.List,
     ){
-        composable(route = RuStoreScreen.Apps.name) {
+        composable<Screen.List> {
             AppListScreen(
-                onAppCardClicked = {
-                    navController.navigate(route = RuStoreScreen.AppDetails.name)
+                onAppCardClicked = { id ->
+                    navController.navigate(route = Screen.Details(id))
                 }
             )
         }
-        composable(route = RuStoreScreen.AppDetails.name) {
+        composable<Screen.Details> { backStackEntry ->
+            val id = backStackEntry.toRoute<Screen.Details>().id
             AppDetailsScreen(
-                onBackClicked = {navController.navigate(route = RuStoreScreen.Apps.name)}
+                id,
+                onBackClicked = {navController.navigate(route = Screen.List)}
             )
         }
     }

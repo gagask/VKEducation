@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.vkeducation.domain.AppDetails
-import com.example.vkeducation.domain.Category
 import com.example.vkeducation.ui.theme.VkEducationTheme
 
 @Composable
@@ -87,7 +86,7 @@ private fun Preview() {
                     id = "Guild",
                     name = "Гильдия Героев: Экшен ММО РПГ",
                     developer = "VK Play",
-                    category = Category.GAME,
+                    category = "Игра",
                     ageRating = 12,
                     size = 223.7f,
                     screenshotUrlList = listOf(

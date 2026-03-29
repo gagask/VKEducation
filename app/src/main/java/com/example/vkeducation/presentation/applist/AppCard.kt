@@ -20,11 +20,11 @@ import coil3.compose.AsyncImage
 import com.example.vkeducation.domain.App
 
 @Composable
-fun AppCard(app: App, onClick: () -> Unit) {
+fun AppCard(app: App, onClick: (String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable{onClick()}
+            .clickable{onClick(app.id)}
     ){
         AsyncImage(
             model = app.iconUrl,

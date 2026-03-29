@@ -1,14 +1,9 @@
 package com.example.vkeducation.presentation.appdetails
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vkeducation.data.AppDetailsApi
-import com.example.vkeducation.data.AppDetailsMapper
-import com.example.vkeducation.data.AppDetailsMockRepositoryImpl
-import com.example.vkeducation.data.CategoryMapper
-import com.example.vkeducation.domain.AppDetails
-import com.example.vkeducation.domain.AppDetailsRepository
-import com.example.vkeducation.domain.Category
+import com.example.vkeducation.domain.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -23,7 +18,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
-    private val repository: AppDetailsRepository
+    private val repository: AppRepository
 ) : ViewModel() {
 
 
@@ -32,10 +27,6 @@ class AppDetailsViewModel @Inject constructor(
 
     private val _events = Channel<AppDetailsEvent>(BUFFERED)
     val events = _events.receiveAsFlow()
-
-    init {
-        getAppDetails()
-    }
 
     fun showUnderDevelopmentMessage() {
         viewModelScope.launch {
@@ -53,7 +44,7 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getAppDetails() {
+    fun getAppDetails(id: String) {
         viewModelScope.launch {
             _state.value = AppDetailsState.Loading
 
@@ -62,13 +53,14 @@ class AppDetailsViewModel @Inject constructor(
                 delay(2.seconds)
 
                 // В будущем заменим этот метод на вызов API.
-                val appDetails = repository.get("Ultra_id")
+                val appDetails = repository.getApp(id)
 
                 _state.value = AppDetailsState.Content(
                     appDetails = appDetails,
                     descriptionCollapsed = false,
                 )
-            }.onFailure {
+            }.onFailure { error ->
+                Log.d("AppDetailsVM", "${error.message}")
                 _state.value = AppDetailsState.Error
             }
         }

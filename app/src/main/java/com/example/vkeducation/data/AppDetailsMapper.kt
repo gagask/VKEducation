@@ -4,14 +4,12 @@ import com.example.vkeducation.data.dto.AppDetailsDto
 import com.example.vkeducation.domain.AppDetails
 import jakarta.inject.Inject
 
-class AppDetailsMapper @Inject constructor(
-    private val categoryMapper: CategoryMapper
-) {
+class AppDetailsMapper @Inject constructor() {
     fun toDomain(dto: AppDetailsDto) = AppDetails(
         id = dto.id,
         name = dto.name,
         developer = dto.developer,
-        category = categoryMapper.toDomain(dto.category),
+        category = dto.category,
         ageRating = dto.ageRating,
         size = dto.size,
         iconUrl = dto.iconUrl,

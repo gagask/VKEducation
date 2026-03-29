@@ -36,7 +36,7 @@ import com.example.vkeducation.ui.theme.VkEducationTheme
 fun AppListScreen(
     modifier: Modifier = Modifier,
     viewModel: AppListViewModel = hiltViewModel(),
-    onAppCardClicked: () -> Unit = {}
+    onAppCardClicked: (String) -> Unit = {}
 ) {
 
     val state: AppListState by viewModel.state.collectAsStateWithLifecycle()

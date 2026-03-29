@@ -1,8 +1,6 @@
 package com.example.vkeducation.di
 
-import com.example.vkeducation.data.AppDetailsMockRepositoryImpl
 import com.example.vkeducation.data.AppRepositoryImpl
-import com.example.vkeducation.domain.AppDetailsRepository
 import com.example.vkeducation.domain.AppRepository
 import dagger.Binds
 import dagger.Module
@@ -17,9 +15,4 @@ abstract class RepositoryModule {
     abstract fun bindAppListRepository(
         impl: AppRepositoryImpl
     ): AppRepository
-
-    @Binds
-    abstract fun bindAppDetailsRepository(
-        impl: AppDetailsMockRepositoryImpl
-    ): AppDetailsRepository
 }

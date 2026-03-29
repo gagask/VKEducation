@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.vkeducation.R
 import com.example.vkeducation.domain.AppDetails
-import com.example.vkeducation.domain.Category
 import com.example.vkeducation.ui.theme.VkEducationTheme
 import kotlin.math.roundToInt
 
@@ -49,7 +48,7 @@ fun AppDetailsHeader(
         Spacer(Modifier.width(16.dp))
         Column {
             Text(
-                text = getCategoryText(appDetails.category),
+                text = appDetails.category,
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 12.sp,
             )
@@ -86,13 +85,6 @@ fun AppDetailsHeader(
     }
 }
 
-// Статичные строки, которые не приходят из бэкенда
-// нужно хранить в ресурсах (strings.xml).
-@Composable
-private fun getCategoryText(category: Category): String = when (category) {
-    Category.APP -> stringResource(R.string.category_app)
-    Category.GAME -> stringResource(R.string.category_game)
-}
 
 @Preview
 @Composable
@@ -101,7 +93,7 @@ private fun Preview() {
         id = "Guild",
         name = "Гильдия Героев: Экшен ММО РПГ",
         developer = "VK Play",
-        category = Category.GAME,
+        category = "Игра",
         ageRating = 12,
         size = 223.7f,
         screenshotUrlList = listOf(
