@@ -53,7 +53,7 @@ class AppDetailsViewModel @Inject constructor(
                 delay(2.seconds)
 
                 // В будущем заменим этот метод на вызов API.
-                val appDetails = repository.getApp(id)
+                val appDetails = repository.getAppDetails(id)
 
                 _state.value = AppDetailsState.Content(
                     appDetails = appDetails,

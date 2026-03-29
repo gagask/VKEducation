@@ -10,7 +10,7 @@ interface AppApi {
     suspend fun getApps(): List<AppDto>
 
     @GET("/catalog/{id}")
-    suspend fun getApp(
+    suspend fun getAppDetails(
         @Path("id") id: String
     ): AppDetailsDto
 }
