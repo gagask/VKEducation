@@ -49,10 +49,6 @@ class AppDetailsViewModel @Inject constructor(
             _state.value = AppDetailsState.Loading
 
             runCatching {
-                // Эмулируем загрузку с бэкенда
-                delay(2.seconds)
-
-                // В будущем заменим этот метод на вызов API.
                 val appDetails = repository.getAppDetails(id)
 
                 _state.value = AppDetailsState.Content(
