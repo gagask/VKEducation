@@ -54,21 +54,25 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
+    suspend fun load() {
+        _state.value = AppDetailsState.Loading
+
+        runCatching {
+            val appDetails = repository.getAppDetails(id)
+
+            _state.value = AppDetailsState.Content(
+                appDetails = appDetails,
+                descriptionCollapsed = false,
+            )
+        }.onFailure { error ->
+            Log.d("AppDetailsVM", "${error.message}")
+            _state.value = AppDetailsState.Error
+        }
+    }
+
     fun getAppDetails() {
         viewModelScope.launch {
-            _state.value = AppDetailsState.Loading
-
-            runCatching {
-                val appDetails = repository.getAppDetails(id)
-
-                _state.value = AppDetailsState.Content(
-                    appDetails = appDetails,
-                    descriptionCollapsed = false,
-                )
-            }.onFailure { error ->
-                Log.d("AppDetailsVM", "${error.message}")
-                _state.value = AppDetailsState.Error
-            }
+            load()
         }
     }
 }
