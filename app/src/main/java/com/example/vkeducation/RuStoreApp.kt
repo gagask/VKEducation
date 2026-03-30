@@ -27,10 +27,8 @@ fun RuStoreApp() {
                 }
             )
         }
-        composable<Screen.Details> { backStackEntry ->
-            val id = backStackEntry.toRoute<Screen.Details>().id
+        composable<Screen.Details> {
             AppDetailsScreen(
-                id,
                 onBackClicked = {navController.navigate(route = Screen.List)}
             )
         }
