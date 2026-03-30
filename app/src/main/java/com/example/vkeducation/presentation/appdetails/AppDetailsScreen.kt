@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun AppDetailsScreen(
-    id: String,
     viewModel: AppDetailsViewModel = hiltViewModel(),
     onBackClicked: () -> Unit = {}
 ) {
@@ -31,7 +30,6 @@ fun AppDetailsScreen(
     val events = viewModel.events
 
     val snackbarHostState = remember { SnackbarHostState() }
-    viewModel.getAppDetails(id)
 
     ObserveEvents(
         events = events,
@@ -56,7 +54,7 @@ fun AppDetailsScreen(
 
             is AppDetailsState.Error -> {
                 AppDetailsError(
-                    onRefreshClick = { viewModel.getAppDetails(id) },
+                    onRefreshClick = { viewModel.getAppDetails() },
                     modifier = Modifier
                         .fillMaxSize()
                         .safeDrawingPadding()

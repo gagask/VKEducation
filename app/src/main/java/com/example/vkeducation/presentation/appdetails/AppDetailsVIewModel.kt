@@ -1,9 +1,12 @@
 package com.example.vkeducation.presentation.appdetails
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.example.vkeducation.domain.AppRepository
+import com.example.vkeducation.presentation.navigation.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -18,15 +21,22 @@ import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
-    private val repository: AppRepository
+    private val repository: AppRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    private val route = savedStateHandle.toRoute<Screen.Details>()
+    private val id = route.id
 
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state = _state.asStateFlow()
 
     private val _events = Channel<AppDetailsEvent>(BUFFERED)
     val events = _events.receiveAsFlow()
+
+    init {
+        getAppDetails()
+    }
 
     fun showUnderDevelopmentMessage() {
         viewModelScope.launch {
@@ -44,7 +54,7 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getAppDetails(id: String) {
+    fun getAppDetails() {
         viewModelScope.launch {
             _state.value = AppDetailsState.Loading
 
