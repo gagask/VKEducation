@@ -7,6 +7,8 @@ import com.example.vkeducation.domain.AppDetails
 import com.example.vkeducation.domain.AppRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -26,7 +28,7 @@ class AppRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAppDetails(id: String): AppDetails {
-        val appDetailsEntity = dao.getAppDetails(id)
+        val appDetailsEntity = dao.getAppDetails(id).first()
         if (appDetailsEntity != null)
             return entityMapper.toDomain(appDetailsEntity)
 
@@ -36,5 +38,18 @@ class AppRepositoryImpl @Inject constructor(
             dao.insertAppDetails(entityMapper.toEntity(domain))
         }
         return domain
+    }
+
+    override suspend fun toggleWishlist(id: String) {
+        val currentEntity = dao.getAppDetails(id).first()
+        currentEntity?.let{
+            dao.updateWishlistStatus(id, !it.isInWishlist)
+        }
+    }
+
+    override fun observeAppDetails(id: String): Flow<AppDetails> {
+        return dao.getAppDetails(id)
+            .filterNotNull() // Здесь не уверен, что нужно так обрабатывать
+            .map{ entityMapper.toDomain(it) }
     }
 }
