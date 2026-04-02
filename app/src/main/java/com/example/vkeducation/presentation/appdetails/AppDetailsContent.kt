@@ -21,6 +21,7 @@ fun AppDetailsContent(
     content: AppDetailsState.Content,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
+    onFavoriteClick: () -> Unit,
     onInstallClick: () -> Unit,
     onReadMoreClick: () -> Unit,
     onDeveloperClick: () -> Unit,
@@ -31,8 +32,10 @@ fun AppDetailsContent(
 
     Column(modifier) {
         Toolbar(
+            content.isInWishlist,
             onBackClick = onBackClick,
             onShareClick = onShareClick,
+            onFavoriteClick = onFavoriteClick
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
@@ -99,10 +102,12 @@ private fun Preview() {
                     description = "Легендарный рейд героев в Фэнтези РПГ. Станьте героем гильдии и зразите мастера подземелья!"
                 ),
                 descriptionCollapsed = false,
+                isInWishlist = false
             ),
             onReadMoreClick = {},
             onBackClick = {},
             onShareClick = {},
+            onFavoriteClick = {},
             onInstallClick = {},
             onDeveloperClick = {},
             modifier = Modifier.fillMaxSize(),

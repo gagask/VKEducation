@@ -71,6 +71,9 @@ fun AppDetailsScreen(
                     onShareClick = {
                         viewModel.showUnderDevelopmentMessage()
                     },
+                    onFavoriteClick = {
+                        viewModel.toggleWishlist()
+                    },
                     onInstallClick = {
                         viewModel.showUnderDevelopmentMessage()
                     },

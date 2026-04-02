@@ -14,6 +14,7 @@ import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -35,6 +36,7 @@ class AppDetailsViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
+        observeAppDetails()
         getAppDetails()
     }
 
@@ -54,25 +56,37 @@ class AppDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun load() {
-        _state.value = AppDetailsState.Loading
+    fun getAppDetails() {
+        viewModelScope.launch {
 
-        runCatching {
-            val appDetails = repository.getAppDetails(id)
-
-            _state.value = AppDetailsState.Content(
-                appDetails = appDetails,
-                descriptionCollapsed = false,
-            )
-        }.onFailure { error ->
-            Log.d("AppDetailsVM", "${error.message}")
-            _state.value = AppDetailsState.Error
+            runCatching {
+                repository.getAppDetails(id)
+            }.onFailure { error ->
+                Log.d("AppDetailsVM", "${error.message}")
+                _state.value = AppDetailsState.Error
+            }
         }
     }
 
-    fun getAppDetails() {
+    private fun observeAppDetails() {
         viewModelScope.launch {
-            load()
+            repository.observeAppDetails(id)
+                .catch {
+                    _state.value = AppDetailsState.Error
+                }
+                .collect { appDetails ->
+                    _state.value = AppDetailsState.Content(
+                        appDetails = appDetails,
+                        descriptionCollapsed = false,
+                        isInWishlist = appDetails.isInWishlist
+                    )
+                }
+        }
+    }
+
+    fun toggleWishlist() {
+        viewModelScope.launch {
+            repository.toggleWishlist(id)
         }
     }
 }
