@@ -1,5 +1,8 @@
-package com.example.vkeducation.data
+package com.example.vkeducation.data.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class AppDetailsDto(
     val id: String,
     val name: String,
