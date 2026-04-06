@@ -15,15 +15,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vkeducation.R
 import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun AppDetailsScreen(
+    viewModel: AppDetailsViewModel = hiltViewModel(),
     onBackClicked: () -> Unit = {}
 ) {
-    val viewModel = viewModel<AppDetailsViewModel>()
+
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
 

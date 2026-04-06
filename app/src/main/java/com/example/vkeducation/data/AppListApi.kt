@@ -1,8 +1,9 @@
 package com.example.vkeducation.data
 
 import com.example.vkeducation.R
+import jakarta.inject.Inject
 
-class AppListApi  {
+class AppListApi @Inject constructor() {
     suspend fun get(): List<AppCardDto> {
         return listOf(
             AppCardDto(

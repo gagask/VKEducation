@@ -9,6 +9,8 @@ import com.example.vkeducation.data.CategoryMapper
 import com.example.vkeducation.domain.AppDetails
 import com.example.vkeducation.domain.AppDetailsRepository
 import com.example.vkeducation.domain.Category
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.delay
@@ -19,12 +21,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
-class AppDetailsViewModel : ViewModel() {
+@HiltViewModel
+class AppDetailsViewModel @Inject constructor(
+    private val repository: AppDetailsRepository
+) : ViewModel() {
 
-    private val repository: AppDetailsRepository = AppDetailsMockRepositoryImpl(
-        mapper = AppDetailsMapper(CategoryMapper()),
-        api = AppDetailsApi()
-    )
 
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state = _state.asStateFlow()
