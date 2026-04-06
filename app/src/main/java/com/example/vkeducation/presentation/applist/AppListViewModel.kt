@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.vkeducation.domain.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +32,7 @@ class AppListViewModel @Inject constructor(
 
     fun showLogoMessage() {
         viewModelScope.launch {
-            _events.send(AppListEvent.RuStoreLogo)
+            _events.send(AppListEvent.RuStoreLogoClicked)
         }
     }
 
@@ -45,6 +46,8 @@ class AppListViewModel @Inject constructor(
             }.onFailure { error ->
                 Log.d("AppListViewModel", "${error.message}")
                 _state.value = AppListState.Error
+                if (error is CancellationException)
+                    throw error
             }
         }
 
