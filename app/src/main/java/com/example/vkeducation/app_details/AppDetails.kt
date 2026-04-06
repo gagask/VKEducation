@@ -1,6 +1,6 @@
-package com.example.vkeducation.data
+package com.example.vkeducation.app_details
 
-data class App(
+data class AppDetails(
     val name: String,
     val developer: String,
     val category: Category,

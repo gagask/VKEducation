@@ -1,6 +1,6 @@
-package com.example.vkeducation.data
+package com.example.vkeducation.app_list
 
-data class AppCard (
+data class AppCardInfo (
     val image: Int,
     val name: String,
     val shortDescription: String,

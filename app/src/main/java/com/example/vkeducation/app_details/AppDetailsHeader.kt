@@ -24,13 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.vkeducation.R
-import com.example.vkeducation.data.App
-import com.example.vkeducation.data.Category
+import com.example.vkeducation.ui.theme.VkEducationTheme
 import kotlin.math.roundToInt
 
 @Composable
 fun AppDetailsHeader(
-    app: App,
+    appDetails: AppDetails,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -38,7 +37,7 @@ fun AppDetailsHeader(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AsyncImage(
-            model = app.iconUrl,
+            model = appDetails.iconUrl,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -48,26 +47,26 @@ fun AppDetailsHeader(
         Spacer(Modifier.width(16.dp))
         Column {
             Text(
-                text = getCategoryText(app.category),
+                text = getCategoryText(appDetails.category),
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 12.sp,
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = app.name,
+                text = appDetails.name,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.headlineSmall,
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = app.developer,
+                text = appDetails.developer,
                 fontSize = 12.sp,
             )
             Spacer(Modifier.height(4.dp))
             Row {
                 Column(Modifier.width(IntrinsicSize.Max)) {
                     Text(
-                        text = "${app.ageRating}+",
+                        text = "${appDetails.ageRating}+",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                     )
@@ -76,7 +75,7 @@ fun AppDetailsHeader(
                 }
                 Spacer(Modifier.width(12.dp))
                 Column {
-                    Text(text = "${app.size.roundToInt()} MB")
+                    Text(text = "${appDetails.size.roundToInt()} MB")
                     Spacer(Modifier.height(4.dp))
                     Text(text = stringResource(R.string.app_details_size))
                 }
@@ -96,7 +95,7 @@ private fun getCategoryText(category: Category): String = when (category) {
 @Preview
 @Composable
 private fun Preview() {
-    val app = App(
+    val appDetails = AppDetails(
         name = "Гильдия Героев: Экшен ММО РПГ",
         developer = "VK Play",
         category = Category.GAME,
@@ -112,7 +111,7 @@ private fun Preview() {
         description = "Легендарный рейд героев в Фэнтези РПГ. Станьте героем гильдии и зразите мастера подземелья!"
 
     )
-    MaterialTheme {
-        AppDetailsHeader(app = app, modifier = Modifier.fillMaxWidth())
+    VkEducationTheme {
+        AppDetailsHeader(appDetails = appDetails, modifier = Modifier.fillMaxWidth())
     }
 }
