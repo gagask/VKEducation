@@ -7,6 +7,7 @@ import com.example.vkeducation.data.AppListApi
 import com.example.vkeducation.data.AppListMockRepositoryImpl
 import com.example.vkeducation.data.AppTypeMapper
 import com.example.vkeducation.domain.AppListRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,7 +35,7 @@ class AppListViewModel: ViewModel() {
 
     fun showLogoMessage() {
         viewModelScope.launch {
-            _events.send(AppListEvent.RuStoreLogo)
+            _events.send(AppListEvent.RuStoreLogoClicked)
         }
     }
 
@@ -45,8 +46,10 @@ class AppListViewModel: ViewModel() {
             runCatching {
                 val appCards = appListRepository.get()
                 _state.value = AppListState.Content(appCards)
-            }.onFailure {
+            }.onFailure { error ->
                 _state.value = AppListState.Error
+                if (error is CancellationException)
+                    throw error
             }
         }
 

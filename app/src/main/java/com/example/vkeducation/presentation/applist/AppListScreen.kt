@@ -49,7 +49,7 @@ fun AppListScreen(
     LaunchedEffect(Unit) {
         events.collect { event ->
             when (event) {
-                is AppListEvent.RuStoreLogo -> {
+                is AppListEvent.RuStoreLogoClicked -> {
                     snackbarHostState.showSnackbar(logoMessage)
                 }
             }
