@@ -3,6 +3,7 @@ package com.example.vkeducation.app_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkeducation.R
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +26,7 @@ class AppListViewModel: ViewModel() {
 
     fun showLogoMessage() {
         viewModelScope.launch {
-            _events.send(AppListEvent.RuStoreLogo)
+            _events.send(AppListEvent.RuStoreLogoClicked)
         }
     }
 
@@ -35,8 +36,10 @@ class AppListViewModel: ViewModel() {
         runCatching {
             val appCards = getAppCards()
             _state.value = AppListState.Content(appCards)
-        }.onFailure {
+        }.onFailure { error ->
             _state.value = AppListState.Error
+            if (error is CancellationException)
+                throw error
         }
     }
 
