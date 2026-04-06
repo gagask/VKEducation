@@ -23,4 +23,10 @@
 
     <string name="app_details_error">Произошла непредвиденная ошибка</string>
     <string name="app_details_error_refresh">Перезагрузить</string>
+
+    <string name="type_finance">Финансы</string>
+    <string name="type_tools">Инструменты</string>
+    <string name="type_transport">Транспорт</string>
+
+
 </resources>
