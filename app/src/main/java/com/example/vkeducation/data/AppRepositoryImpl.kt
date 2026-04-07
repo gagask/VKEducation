@@ -27,17 +27,20 @@ class AppRepositoryImpl @Inject constructor(
         return dto.map{ appMapper.toDomain(it) }
     }
 
-    override suspend fun getAppDetails(id: String): AppDetails {
-        val appDetailsEntity = dao.getAppDetails(id).first()
-        if (appDetailsEntity != null)
-            return entityMapper.toDomain(appDetailsEntity)
+    override fun getAppDetails(id: String): Flow<AppDetails> {
+        return dao.getAppDetails(id).map { entity ->
+            if (entity != null)
+                entityMapper.toDomain(entity)
+            else {
+                val dto = api.getAppDetails(id)
+                val domain = appDetailsMapper.toDomain(dto)
+                withContext(Dispatchers.IO){
+                    dao.insertAppDetails(entityMapper.toEntity(domain))
+                }
 
-        val dto = api.getAppDetails(id)
-        val domain = appDetailsMapper.toDomain(dto)
-        withContext(Dispatchers.IO){
-            dao.insertAppDetails(entityMapper.toEntity(domain))
+                domain
+            }
         }
-        return domain
     }
 
     override suspend fun toggleWishlist(id: String) {

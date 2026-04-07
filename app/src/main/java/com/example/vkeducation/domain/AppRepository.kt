@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface AppRepository {
     suspend fun getApps(): List<App>
 
-    suspend fun getAppDetails(id: String): AppDetails
+    fun getAppDetails(id: String): Flow<AppDetails>
 
     suspend fun toggleWishlist(id: String)
 
