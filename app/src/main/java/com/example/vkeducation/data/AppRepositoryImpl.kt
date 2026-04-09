@@ -2,6 +2,9 @@ package com.example.vkeducation.data
 
 import com.example.vkeducation.data.local.AppDetailsDao
 import com.example.vkeducation.data.local.AppDetailsEntityMapper
+import com.example.vkeducation.data.remote.AppApi
+import com.example.vkeducation.data.remote.AppDetailsMapper
+import com.example.vkeducation.data.remote.AppMapper
 import com.example.vkeducation.domain.App
 import com.example.vkeducation.domain.AppDetails
 import com.example.vkeducation.domain.AppRepository

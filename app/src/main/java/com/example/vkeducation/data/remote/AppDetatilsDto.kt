@@ -1,4 +1,4 @@
-package com.example.vkeducation.data.dto
+package com.example.vkeducation.data.remote
 
 import kotlinx.serialization.Serializable
 

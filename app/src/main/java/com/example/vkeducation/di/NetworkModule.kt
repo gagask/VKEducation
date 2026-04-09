@@ -1,6 +1,6 @@
 package com.example.vkeducation.di
 
-import com.example.vkeducation.data.AppApi
+import com.example.vkeducation.data.remote.AppApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

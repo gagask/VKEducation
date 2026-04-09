@@ -1,6 +1,5 @@
-package com.example.vkeducation.data
+package com.example.vkeducation.data.remote
 
-import com.example.vkeducation.data.dto.AppDto
 import com.example.vkeducation.domain.App
 import jakarta.inject.Inject
 
