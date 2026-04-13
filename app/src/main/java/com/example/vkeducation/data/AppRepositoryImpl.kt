@@ -1,5 +1,6 @@
 package com.example.vkeducation.data
 
+import com.example.vkeducation.core.dispatchers.DispatcherProvider
 import com.example.vkeducation.data.local.AppDetailsDao
 import com.example.vkeducation.data.local.AppDetailsEntityMapper
 import com.example.vkeducation.data.remote.AppApi
@@ -18,6 +19,7 @@ import javax.inject.Inject
 
 
 class AppRepositoryImpl @Inject constructor(
+    private val dispatchers: DispatcherProvider,
     val appMapper: AppMapper,
     val appDetailsMapper: AppDetailsMapper,
     val entityMapper: AppDetailsEntityMapper,
@@ -37,7 +39,7 @@ class AppRepositoryImpl @Inject constructor(
             else {
                 val dto = api.getAppDetails(id)
                 val domain = appDetailsMapper.toDomain(dto)
-                withContext(Dispatchers.IO){
+                withContext(dispatchers.io){
                     dao.insertAppDetails(entityMapper.toEntity(domain))
                 }
 
