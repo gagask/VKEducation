@@ -59,7 +59,7 @@ class AppDetailsViewModel @Inject constructor(
         viewModelScope.launch {
 
             runCatching {
-                repository.getAppDetails(id).first()
+                repository.getAppDetails(id)
                 Timber.d("Getting App Details")
             }.onFailure { error ->
                 Timber.d("${error.message}")
