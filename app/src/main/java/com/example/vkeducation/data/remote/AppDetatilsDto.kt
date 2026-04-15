@@ -1,6 +1,9 @@
-package com.example.vkeducation.domain
+package com.example.vkeducation.data.remote
 
-data class AppDetails(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AppDetailsDto(
     val id: String = "id",
     val name: String = "name",
     val developer: String = "developer",
@@ -10,5 +13,4 @@ data class AppDetails(
     val iconUrl: String = "iconUrl",
     val screenshotUrlList: List<String> = emptyList(),
     val description: String = "description",
-    val isInWishlist: Boolean = false
 )

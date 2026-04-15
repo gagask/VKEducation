@@ -1,6 +1,5 @@
 package com.example.vkeducation.presentation.applist
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vkeducation.domain.AppRepository
@@ -12,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
@@ -43,7 +43,7 @@ class AppListViewModel @Inject constructor(
                 val appCards = appRepository.getApps()
                 _state.value = AppListState.Content(appCards)
             }.onFailure { error ->
-                Log.d("AppListViewModel", "${error.message}")
+                Timber.d("${error.message}")
                 _state.value = AppListState.Error
             }
         }

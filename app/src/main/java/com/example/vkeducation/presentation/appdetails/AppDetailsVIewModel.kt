@@ -1,6 +1,5 @@
 package com.example.vkeducation.presentation.appdetails
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,14 +10,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.seconds
+import timber.log.Timber
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
@@ -61,20 +60,23 @@ class AppDetailsViewModel @Inject constructor(
 
             runCatching {
                 repository.getAppDetails(id)
+                Timber.d("Getting App Details")
             }.onFailure { error ->
-                Log.d("AppDetailsVM", "${error.message}")
+                Timber.d("${error.message}")
                 _state.value = AppDetailsState.Error
             }
         }
     }
 
     private fun observeAppDetails() {
+        Timber.d("Start observing!")
         viewModelScope.launch {
             repository.observeAppDetails(id)
                 .catch {
                     _state.value = AppDetailsState.Error
                 }
                 .collect { appDetails ->
+                    Timber.d("Collected successfully!")
                     _state.value = AppDetailsState.Content(
                         appDetails = appDetails,
                         descriptionCollapsed = false,

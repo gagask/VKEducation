@@ -1,6 +1,9 @@
-package com.example.vkeducation.domain
+package com.example.vkeducation.data.remote
 
-data class App(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AppDto(
     val id: String = "id",
     val name: String = "name",
     val description: String = "description",
